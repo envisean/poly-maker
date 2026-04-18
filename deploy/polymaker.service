@@ -1,0 +1,27 @@
+[Unit]
+Description=poly-maker signal service — Polymarket market maker + 8-signal confluence grid
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=polymaker
+Group=polymaker
+WorkingDirectory=/home/polymaker/poly-maker
+Environment=PATH=/home/polymaker/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+EnvironmentFile=-/home/polymaker/poly-maker/.env
+ExecStart=/home/polymaker/.local/bin/uv run python -m signals.service.run
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/polymaker/poly-maker/data
+
+[Install]
+WantedBy=multi-user.target
