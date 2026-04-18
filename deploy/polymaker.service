@@ -10,7 +10,7 @@ Group=polymaker
 WorkingDirectory=/home/polymaker/poly-maker
 Environment=PATH=/home/polymaker/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 EnvironmentFile=-/home/polymaker/poly-maker/.env
-ExecStart=/home/polymaker/.local/bin/uv run python -m signals.service.run
+ExecStart=/home/polymaker/poly-maker/.venv/bin/python -m signals.service.run
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal
